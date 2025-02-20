@@ -9,12 +9,12 @@ using namespace std;
 #include "CoupleMessageProba.hpp"
 #include "BuildHuffmanTree.hpp"
 
-char fileName [200]; //Le nom du fichier à traiter
+char fileName [200]; //Le nom du fichier ï¿½ traiter
 
 /**
  * printHistogram()
  * Affiche l'histogramme
- * \param histogram : histogramme stockant les couples message - probabilité.
+ * \param histogram : histogramme stockant les couples message - probabilitï¿½.
  */
 void printHistogram(const vector<CoupleMessageProba>& histogram) {
   int i;                          //Indice de boucle
@@ -28,16 +28,16 @@ void printHistogram(const vector<CoupleMessageProba>& histogram) {
 
 /**
  * readFileAndBuildHistogram.
- * Lit un fichier et calcul les probabilités associées à chaque message.
- * \param inFileName : nom du fichier à lire.
- * \param histogram : histogramme stockant les couples message - probabilité. C'est un paramètre d'entrée sortie
+ * Lit un fichier et calcul les probabilitï¿½s associï¿½es ï¿½ chaque message.
+ * \param inFileName : nom du fichier ï¿½ lire.
+ * \param histogram : histogramme stockant les couples message - probabilitï¿½. C'est un paramï¿½tre d'entrï¿½e sortie
  */
 void readFileAndBuildHistogram(char* inFileName, vector<CoupleMessageProba>& histogram) {
 
-  char car;                      //Caractère lu
-  int indice;                    //Indice du caractère dans l'histogramme
-  double proba;                  //Proba du caractère lu
-  int tailleSource;              //Taille de la source (nombre de caractère)
+  char car;                      //Caractï¿½re lu
+  int indice;                    //Indice du caractï¿½re dans l'histogramme
+  double proba;                  //Proba du caractï¿½re lu
+  int tailleSource;              //Taille de la source (nombre de caractï¿½re)
   CoupleMessageProba messproba;  //Un couple message <-> proba
 
   //EFFACAGE DU VECTEUR HISTOGRAMME
@@ -56,12 +56,21 @@ void readFileAndBuildHistogram(char* inFileName, vector<CoupleMessageProba>& his
 //  while (!ifs.eof()) {
   while (ifs>>car) {
 
-//    ifs>>car; //Lecture du caractère courant (sous la tête de lecture)
+//    ifs>>car; //Lecture du caractï¿½re courant (sous la tï¿½te de lecture)
     cout<<car<<endl;
 
-    /***************/
-    /* A COMPLETER */
-    /***************/
+
+    if (CoupleMessageProba.getMessage(car).exists())
+    {
+      CoupleMessageProba.getMessage(car.setProba(CoupleMessageProba.getProba()+1));
+    }
+    else{
+      CoupleMessageProba messproba;  // CrÃ©er un objet CoupleMessageProba
+      messproba.setMessage(car);     // DÃ©finir le message (caractÃ¨re)
+      messproba.setProba(1);         // Initialiser la probabilitÃ© Ã  1
+
+      histogram.push_back(messproba); // Ajouter l'objet messproba au vecteur
+    }
 
   }
 
@@ -105,7 +114,7 @@ void processOptionsInLine(int argc, char** argv){
  */
 int main(int argc, char *argv[]) {
 
-  vector<CoupleMessageProba> histogram; //Histogramme stockant les messages et les proba associées
+  vector<CoupleMessageProba> histogram; //Histogramme stockant les messages et les proba associï¿½es
 
   /*TRAITE LES OPTIONS*/
   processOptionsInLine(argc, argv);
@@ -118,7 +127,7 @@ int main(int argc, char *argv[]) {
   /*CONSTRUCTION DE L'ARBRE D'HUFFMAN*/
   BuildHuffmanTree huffmanContructeur;
   huffmanContructeur.initTable(histogram); //Initialisation de la table message <-> symbole
-  huffmanContructeur.buildTree();          //Construction à proprement parler
+  huffmanContructeur.buildTree();          //Construction ï¿½ proprement parler
   huffmanContructeur.printTree();
 }
 
